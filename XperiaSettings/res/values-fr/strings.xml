@@ -13,7 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources>
     <string name="app_name">Paramètres avancés</string>
     <string name="defaults_button">Réinitialiser</string>
     <string name="category_haptic_title">Haptique</string>
