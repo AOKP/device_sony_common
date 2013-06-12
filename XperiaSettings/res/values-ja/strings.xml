@@ -24,7 +24,6 @@
     <!-- VibratorTuning -->
     <string name="vibrator_title">バイブレーション</string>
     <string name="vibrator_tuning_title">バイブレーション強度</string>
-    <string name="vibrator_tuning_title_head">バイブレーション強度</string>
     <string name="vibrator_tuning_summary_head">バイブレーション強度を調整する</string>
     <string name="vibrator_warning">%1$dを超える値は推奨しません</string>
 
