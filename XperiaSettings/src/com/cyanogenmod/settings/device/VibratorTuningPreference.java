@@ -143,6 +143,17 @@ public class VibratorTuningPreference extends DialogPreference implements SeekBa
         } else {
             Utils.writeValue(FILE_PATH, String.valueOf(mOriginalValue));
         }
+        setSummary(getValue());
+    }
+
+    public String getValue () {
+        try {
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
+            int strength = percentToStrength(settings.getInt("percent", strengthToPercent(DEFAULT_VALUE)));
+            return strength + "%";
+        } catch (Exception e) {
+            return "90%";
+        }
     }
 
     public static void restore(Context context) {
