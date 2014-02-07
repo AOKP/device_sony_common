@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.cyanogenmod.settings.device;
+package com.cyanogenmod.settings.device.prefs;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -35,6 +35,9 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Button;
+
+import com.cyanogenmod.settings.device.R;
+import com.cyanogenmod.settings.device.Utils;
 
 import java.lang.Math;
 import java.text.DecimalFormat;
@@ -126,6 +129,8 @@ public class VibratorTuningPreference extends DialogPreference implements SeekBa
             @Override
             public void onClick(View v) {
                 mSeekBar.setProgress(strengthToPercent(DEFAULT_VALUE));
+                Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vib.vibrate(200);
             }
         });
     }
@@ -142,6 +147,17 @@ public class VibratorTuningPreference extends DialogPreference implements SeekBa
             editor.commit();
         } else {
             Utils.writeValue(FILE_PATH, String.valueOf(mOriginalValue));
+        }
+        setSummary(getValue());
+    }
+
+    public String getValue () {
+        try {
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
+            int strength = settings.getInt("percent", strengthToPercent(DEFAULT_VALUE));
+            return strength + "%";
+        } catch (Exception e) {
+            return "90%";
         }
     }
 
