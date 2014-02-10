@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.cyanogenmod.settings.device;
+package com.cyanogenmod.settings.device.prefs;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.drawable.Drawable;
@@ -32,12 +31,12 @@ import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Button;
 
-import java.lang.Math;
-import java.text.DecimalFormat;
+import com.cyanogenmod.settings.device.R;
+import com.cyanogenmod.settings.device.Utils;
 
 /**
  * Special preference type that allows configuration of vibrator intensity settings on Sony
@@ -51,6 +50,7 @@ public class VibratorTuningPreference extends DialogPreference implements SeekBa
     private static int WARNING_THRESHOLD;
     private static int DEFAULT_VALUE;
     private static int MIN_VALUE;
+    private static Boolean SUPPORTED;
 
     private Context mContext;
     private SeekBar mSeekBar;
@@ -70,6 +70,7 @@ public class VibratorTuningPreference extends DialogPreference implements SeekBa
         WARNING_THRESHOLD = Integer.valueOf(context.getResources().getString(R.string.intensity_warning_threshold));
         DEFAULT_VALUE = Integer.valueOf(context.getResources().getString(R.string.intensity_default_value));
         MIN_VALUE = Integer.valueOf(context.getResources().getString(R.string.intensity_min_value));
+        SUPPORTED = context.getResources().getBoolean(R.bool.has_vibrator_tuning);
 
         setDialogLayoutResource(R.layout.preference_dialog_vibrator_tuning);
     }
@@ -126,6 +127,8 @@ public class VibratorTuningPreference extends DialogPreference implements SeekBa
             @Override
             public void onClick(View v) {
                 mSeekBar.setProgress(strengthToPercent(DEFAULT_VALUE));
+                Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vib.vibrate(200);
             }
         });
     }
@@ -142,6 +145,17 @@ public class VibratorTuningPreference extends DialogPreference implements SeekBa
             editor.commit();
         } else {
             Utils.writeValue(FILE_PATH, String.valueOf(mOriginalValue));
+        }
+        setSummary(getValue());
+    }
+
+    public String getValue() {
+        try {
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
+            int strength = settings.getInt("percent", strengthToPercent(DEFAULT_VALUE));
+            return strength + "%";
+        } catch (Exception e) {
+            return "90%";
         }
     }
 
@@ -192,8 +206,8 @@ public class VibratorTuningPreference extends DialogPreference implements SeekBa
     }
 
     /**
-    * Convert vibrator strength to percent
-    */
+     * Convert vibrator strength to percent
+     */
     public static int strengthToPercent(int strength) {
         double maxValue = MAX_VALUE;
         double minValue = MIN_VALUE;
@@ -209,8 +223,8 @@ public class VibratorTuningPreference extends DialogPreference implements SeekBa
     }
 
     /**
-    * Convert percent to vibrator strength
-    */
+     * Convert percent to vibrator strength
+     */
     public static int percentToStrength(int percent) {
         int strength = Math.round((((MAX_VALUE - MIN_VALUE) * percent) / 100) + MIN_VALUE);
 
@@ -220,5 +234,18 @@ public class VibratorTuningPreference extends DialogPreference implements SeekBa
             strength = MIN_VALUE;
 
         return strength;
+    }
+
+    public Boolean checkSupport() {
+        Boolean fileExists = Utils.fileExists(FILE_PATH);
+        //Log.d(TAG, "File exists : " + fileExists);
+        //Log.d(TAG, "Enabled via config : " + isEnabledInConfig);
+        if ((SUPPORTED && fileExists)) {
+            return true;
+        } else {
+            setSummary(R.string.summary_unsupported);
+            setEnabled(false);
+            return false;
+        }
     }
 }
