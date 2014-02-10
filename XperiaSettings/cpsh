@@ -1,7 +1,0 @@
-#!/bin/bash
-rm -rfv src/com
-rm -rfv res
-rm -rfv AndroidManifest.xml
-cp -rfv /home/championswimmer/AndroidStudioProjects/XperiaSettings/app/src/main/res ./
-cp -rfv /home/championswimmer/AndroidStudioProjects/XperiaSettings/app/src/main/java/com ./src/
-cp -rfv /home/championswimmer/AndroidStudioProjects/XperiaSettings/app/src/main/AndroidManifest.xml ./
