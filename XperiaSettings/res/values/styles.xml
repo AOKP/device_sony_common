@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<!--
   ~ Copyright (C) 2014 Arnav Gupta, AOKP
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,12 +13,12 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
+
 <resources>
-    <string name="app_name">Ajustes avanzados</string>
-    <string name="defaults_button">Restablecer</string>
-    <string name="category_haptic_title">Háptica</string>
-    <string name="vibrator_title">Vibración</string>
-    <string name="vibrator_tuning_title">Intensidad de vibración</string>
-    <string name="vibrator_tuning_summary_head">Establecer la intensidad de vibración</string>
-    <string name="vibrator_warning">No son recomendables valores mayores de %1$d</string>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo">
+        <!-- Customize your theme here. -->
+    </style>
+
 </resources>
