@@ -66,12 +66,13 @@ public class PenModePreference extends CheckBoxPreference {
 
     public static void restore(Context context) {
         SYSFS_PATH = context.getString(R.string.penmode_sysfs_file);
-        DISABLED_VALUE = context.getString(R.string.knock_on_disabled_value);
+        DISABLED_VALUE = context.getString(R.string.penmode_disabled_value);
+        ENABLED_VALUE = context.getString(R.string.penmode_enabled_value);
         if (!Utils.fileExists(SYSFS_PATH)) {
             return;
         }
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-        String value = settings.getString("penmode", DISABLED_VALUE);
+        String value = (settings.getBoolean("penmode", false) ? ENABLED_VALUE : DISABLED_VALUE);
         Utils.writeValue(SYSFS_PATH, value);
     }
 

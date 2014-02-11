@@ -67,11 +67,12 @@ public class KnockOnPreference extends CheckBoxPreference {
     public static void restore(Context context) {
         SYSFS_PATH = context.getString(R.string.knock_on_sysfs_file);
         DISABLED_VALUE = context.getString(R.string.knock_on_disabled_value);
+        ENABLED_VALUE = context.getString(R.string.knock_on_enabled_value);
         if (!Utils.fileExists(SYSFS_PATH)) {
             return;
         }
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-        String value = settings.getString("knock_on", DISABLED_VALUE);
+        String value = (settings.getBoolean("knock_on", false) ? ENABLED_VALUE : DISABLED_VALUE);
         Utils.writeValue(SYSFS_PATH, value);
     }
 
