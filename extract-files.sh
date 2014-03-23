@@ -21,7 +21,7 @@ then
   rm -rf $BASE/*
 fi
 
-for FILE in `cat ../$DEVICE/proprietary-files.txt | grep -v ^# | grep -v ^$`
+for FILE in `grep -v ^# ../$DEVICE/proprietary-files.txt | grep -v ^$ | sort`
 do
   # Split the file from the destination (format is "file[:destination]")
   OLDIFS=$IFS IFS=":" PARSING_ARRAY=($FILE) IFS=$OLDIFS
