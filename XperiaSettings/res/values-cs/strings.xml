@@ -16,13 +16,17 @@
 
 <resources>
     <string name="app_name">Pokročilé nastavení</string>
-
+    <string name="title_activity_xperia_settings">Xperia nastavení</string>
     <string name="defaults_button">Obnovit výchozí</string>
-
-    <string name="category_haptic_title">Hmatová odezva</string>
-
+    <string name="summary_unsupported">Není podporováno</string>
+    <string name="title_haptic">Hmatová odezva</string>
     <string name="vibrator_title">Vibrace</string>
     <string name="vibrator_tuning_title">Síla vibrací</string>
-    <string name="vibrator_tuning_summary_head">Upravení síly vibrací zpětné vazby</string>
-    <string name="vibrator_warning">Hodnoty větší než %1$d nejsou doporučovány</string>
+    <string name="vibrator_tuning_summary_head">Upravit sílu vibrací pro zpětnou vazbu</string>
+    <string name="vibrator_warning">Hodnoty větší než %1$d nejsou doporučeny</string>
+    <string name="title_touchscreen">Dotyková obrazovka</string>
+    <string name="penmode_title">Režim tužky</string>
+    <string name="penmode_summary">Umožnit použití obyčejné tužky či propisky jako stylusu</string>
+    <string name="knock_on_title">Poklepání</string>
+    <string name="knock_on_summary">Dvojím poklepáním na displej dojde k probuzení zařízení</string>
 </resources>
