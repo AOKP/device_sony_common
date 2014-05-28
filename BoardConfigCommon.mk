@@ -13,3 +13,4 @@
 # limitations under the License.
 
 BOARD_VENDOR := sony
+TARGET_NO_SEPARATE_RECOVERY := true
