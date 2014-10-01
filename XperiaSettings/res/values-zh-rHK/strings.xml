@@ -15,4 +15,7 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<resources/>
+<resources>
+  <string name="app_name">Xperia 設定</string>
+  <string name="title_activity_xperia_settings">Xperia 設定</string>
+</resources>
